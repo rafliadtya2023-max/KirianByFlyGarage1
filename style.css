@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0E0E0E;
+  color: #EDEDED;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 28px 16px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+header span {
+  color: #8B1E1E;
+}
+
+header p {
+  margin-top: 6px;
+  color: #9A9A9A;
+  font-size: 14px;
+}
+
+/* SELECTOR */
+.selector {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+select {
+  padding: 12px;
+  background: #161616;
+  color: #EDEDED;
+  border: 1px solid #2A2A2A;
+  border-radius: 8px;
+}
+
+button {
+  padding: 12px;
+  background: transparent;
+  color: #EDEDED;
+  border: 1px solid #8B1E1E;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* HASIL */
+.hasil {
+  display: none;
+  margin: 20px;
+  padding: 20px;
+  background: #161616;
+  border-left: 4px solid #8B1E1E;
+  border-radius: 6px;
+}
+
+.hasil.show {
+  display: block;
+}
+
+/* ITEM RACIKAN */
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #262626;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  color: #9A9A9A;
+  font-size: 14px;
+}
+
+.item b {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+}

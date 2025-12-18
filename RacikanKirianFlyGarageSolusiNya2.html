@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Cek Racikan CVT</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+}
+
+button {
+    background: #b71c1c;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #1c1c1c;
+}
+
+.kesimpulan {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.kesimpulan.ok {
+    background: rgba(0,200,100,.15);
+    border-left: 4px solid #00c864;
+}
+
+.kesimpulan.bad {
+    background: rgba(255,80,80,.15);
+    border-left: 4px solid #ff5050;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Cek Racikan CVT</h2>
+
+    <select id="roller">
+        <option value="">Pilih Roller</option>
+        <option value="9">9 gram</option>
+        <option value="10">10 gram</option>
+        <option value="11">11 gram</option>
+    </select>
+
+    <select id="perCvt">
+        <option value="">Pilih Per CVT</option>
+        <option value="1000">1000 rpm</option>
+        <option value="1200">1200 rpm</option>
+        <option value="1500">1500 rpm</option>
+    </select>
+
+    <select id="penggunaan">
+        <option value="">Penggunaan</option>
+        <option value="harian">Harian</option>
+        <option value="tanjakan">Tanjakan</option>
+        <option value="boncengan">Boncengan</option>
+    </select>
+
+    <button onclick="cekRacikan()">CEK RACIKAN</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function cekRacikan() {
+    const roller = document.getElementById("roller").value;
+    const perCvt = document.getElementById("perCvt").value;
+    const penggunaan = document.getElementById("penggunaan").value;
+    const result = document.getElementById("result");
+
+    if (!roller || !perCvt || !penggunaan) {
+        result.innerHTML = "<b>Lengkapi semua pilihan dulu.</b>";
+        return;
+    }
+
+    let cocok = false;
+
+    // LOGIC AMAN
+    if (penggunaan === "harian" && roller == 10 && perCvt == 1000) cocok = true;
+    if (penggunaan === "tanjakan" && roller <= 10 && perCvt >= 1200) cocok = true;
+    if (penggunaan === "boncengan" && roller <= 10 && perCvt >= 1200) cocok = true;
+
+    // HASIL UTAMA
+    result.innerHTML = `
+        <h3>HASIL RACIKAN</h3>
+        <p>Roller: <b>${roller}g</b></p>
+        <p>Per CVT: <b>${perCvt} rpm</b></p>
+        <p>Penggunaan: <b>${penggunaan}</b></p>
+    `;
+
+    // KESIMPULAN (AMAN)
+    if (cocok) {
+        result.innerHTML += `
+        <div class="kesimpulan ok">
+            <b>KESIMPULAN AKHIR</b><br>
+            Racikan ini <b>AMAN & ENAK DIPAKAI</b>.
+            Tarikan dapet, CVT aman, cocok untuk pemakaian ${penggunaan}.
+        </div>
+        `;
+    } else {
+        result.innerHTML += `
+        <div class="kesimpulan bad">
+            <b>KESIMPULAN AKHIR</b><br>
+            Racikan ini <b>KURANG DISARANKAN</b>.
+            Perlu penyesuaian agar tarikan dan durability lebih optimal.
+        </div>
+        `;
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Racikan Kirian</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+
+        .container {
+            max-width:700px;
+            margin: 0 auto;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 30px;
+            border: 2px solid #8B1E1E;
+        }
+
+        h1 {
+            text-align: center;
+            color: #8B1E1E;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8B1E1E;
+            font-size: 1.1em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            background: #000;
+            color: #fff;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background: transparent;
+            border: 3px solid #8B1E1E;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #8B1E1E;
+        }
+
+        #hasil {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        #hasil.show {
+            display: block !important;
+        }
+
+        .cocok {
+            background: #1a4d1a;
+            border: 3px solid #0f0;
+        }
+
+        .tidak-cocok {
+            background: #4d1a1a;
+            border: 3px solid #f00;
+        }
+
+        .hasil-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cocok .hasil-title {
+            color: #0f0;
+        }
+
+        .tidak-cocok .hasil-title {
+            color: #f00;
+        }
+
+        .detail {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .detail h3 {
+            color: #8B1E1E;
+            margin-bottom: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .saran {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .saran h3 {
+            color: #8B1E1E;
+            margin-bottom: 10px;
+        }
+
+        .saran-box {
+            background: #1a1a1a;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #8B1E1E;
+        }
+
+        .reset-btn {
+            background: #333;
+            border-color: #666;
+            margin-top: 15px;
+        }
+        
+        .kesimpulan {
+    background: #0a0a0a;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 2px dashed #8B1E1E;
+}
+
+.kesimpulan h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #8B1E1E;
+}
+
+.kesimpulan.ok {
+    border-color: #0f0;
+}
+
+.kesimpulan.warn {
+    border-color: #ff0;
+}
+
+.kesimpulan.bad {
+    border-color: #f00;
+}
+
+.kesimpulan p {
+    text-align: center;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+     <h1>🔧GAS CEK <br> KIRIAN KAMU🔧</h1>
+        
+        <div class="form-group">
+            <label>Motor:</label>
+            <select id="motor">
+                <option value="">Pilih Motor</option>
+                <option value="beat">Honda Beat</option>
+                <option value="scoopy">Honda Scoopy</option>
+                <option value="vario125">Honda Vario 125</option>
+                <option value="vario150">Honda Vario 150</option>
+                <option value="vario160">Honda Vario 160</option>
+                <option value="pcx">Honda PCX 160</option>
+                <option value="adv">Honda ADV 160</option>
+                <option value="mio">Yamaha Mio</option>
+                <option value="aerox">Yamaha Aerox 155</option>
+                <option value="nmax">Yamaha Nmax</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Roller (gram):</label>
+            <input type="number" id="roller" placeholder="10">
+        </div>
+
+        <div class="form-group">
+            <label>Per CVT (RPM):</label>
+            <input type="number" id="cvt" placeholder="1000">
+        </div>
+
+        <div class="form-group">
+            <label>Per Sentri (RPM):</label>
+            <input type="number" id="sentri" placeholder="1000">
+        </div>
+
+        <div class="form-group">
+            <label>Penggunaan:</label>
+            <select id="penggunaan">
+                <option value="">Pilih</option>
+                <option value="harian">Harian/Santai</option>
+                <option value="ngebut">Ngebut/Racing</option>
+                <option value="touring">Touring/Jarak Jauh</option>
+                <option value="balance">Balance (Seimbang)</option>
+            </select>
+        </div>
+
+        <button onclick="cekRacikan()">CEK RACIKAN</button>
+
+<div id="hasilKesimpulan"></div>
+        <div id="hasil"></div>
+    </div>
+
+    <script>
+        // Database racikan untuk semua motor
+        const dataMotor = {
+            beat: { roller: {min: 7, ideal: 9, max: 11}, cvt: 1000, sentri: 1000 },
+            scoopy: { roller: {min: 8, ideal: 10, max: 12}, cvt: 1000, sentri: 1000 },
+            vario125: { roller: {min: 9, ideal: 11, max: 13}, cvt: 1000, sentri: 1000 },
+            vario150: { roller: {min: 10, ideal: 12, max: 14}, cvt: 1000, sentri: 1500 },
+            vario160: { roller: {min: 10, ideal: 12, max: 14}, cvt: 1000, sentri: 1500 },
+            pcx: { roller: {min: 11, ideal: 13, max: 15}, cvt: 1500, sentri: 1500 },
+            adv: { roller: {min: 11, ideal: 13, max: 15}, cvt: 1500, sentri: 1500 },
+            mio: { roller: {min: 7, ideal: 9, max: 11}, cvt: 1000, sentri: 1000 },
+            aerox: { roller: {min: 10, ideal: 12, max: 14}, cvt: 1500, sentri: 1500 },
+            nmax: { roller: {min: 11, ideal: 13, max: 15}, cvt: 1500, sentri: 1500 }
+        };
+
+        function cekRacikan() {
+            const motor = document.getElementById('motor').value;
+            const roller = parseInt(document.getElementById('roller').value);
+            const cvt = parseInt(document.getElementById('cvt').value);
+            const sentri = parseInt(document.getElementById('sentri').value);
+            const penggunaan = document.getElementById('penggunaan').value;
+       
+
+            if (!motor || !roller || !cvt || !sentri || !penggunaan) {
+                alert('Isi semua field dulu bos!');
+                return;
+            }
+
+            const std = dataMotor[motor];
+
+// inisialisasi
+let cocok = true;
+let saran = [];
+
+// ==================
+// CEK ROLLER (TARUH DI SINI)
+// ==================
+if (roller < std.roller.min || roller > std.roller.max) {
+    cocok = false;
+    saran.push(
+      `Roller ideal ${std.roller.min}–${std.roller.max} gram`
+    );
+}
+
+// ==================
+// CEK CVT
+// ==================
+if (cvt !== std.cvt) {
+    cocok = false;
+    saran.push(`CVT ideal: ${std.cvt}`);
+}
+
+// ==================
+// CEK SENTRI
+// ==================
+if (sentri !== std.sentri) {
+    cocok = false;
+    saran.push(`Per sentri disarankan ${std.sentri}`);
+}
+
+// ==================
+// BARU KESIMPULAN (PALING BAWAH)
+// ==================
+if (cocok && saran.length === 0) {
+    kesimpulanStatus = 'ok';
+    kesimpulanText = 'Racikan ini AMAN dan cocok digunakan.';
+} else if (!cocok && saran.length <= 2) {
+    kesimpulanStatus = 'warn';
+    kesimpulanText = 'Masih bisa dipakai, tapi perlu penyesuaian.';
+} else {
+    kesimpulanStatus = 'bad';
+    kesimpulanText = 'Racikan ini TIDAK disarankan.';
+}
+// baru render HTML di SINI
+const hasil = document.getElementById('hasilKesimpulan');
+
+hasil.innerHTML = `
+  <div class="kesimpulan ${kesimpulanStatus}">
+    ${kesimpulanText}
+  </div>
+`;
+            // Cek Roller berdasarkan penggunaan
+            if (penggunaan === 'harian') {
+                if (roller < std.roller.min || roller > std.roller.ideal + 1) {
+                    cocok = false;
+                    saran.push(`Roller ${roller}g kurang cocok buat harian. Ideal: ${std.roller.ideal}g biar responsif & irit.`);
+                }
+            } else if (penggunaan === 'ngebut') {
+                if (roller < std.roller.min || roller > std.roller.ideal) {
+                    cocok = false;
+                    saran.push(`Roller ${roller}g kurang cocok buat ngebut. Ideal: ${std.roller.min}-${std.roller.ideal}g biar akselerasi maksimal.`);
+                }
+            } else if (penggunaan === 'touring') {
+                if (roller < std.roller.ideal || roller > std.roller.max) {
+                    cocok = false;
+                    saran.push(`Roller ${roller}g kurang cocok buat touring. Ideal: ${std.roller.ideal}-${std.roller.max}g biar top speed stabil.`);
+                }
+            } else if (penggunaan === 'balance') {
+                if (roller < std.roller.ideal - 1 || roller > std.roller.ideal + 1) {
+                    cocok = false;
+                    saran.push(`Roller ${roller}g kurang balance. Ideal: ${std.roller.ideal}g biar seimbang.`);
+                }
+            }
+
+            // Cek Per CVT
+            if (cvt < std.cvt - 200 || cvt > std.cvt + 300) {
+                cocok = false;
+                saran.push(`Per CVT ${cvt} RPM kurang pas. Standard: ${std.cvt} RPM. Range ideal: ${std.cvt - 200}-${std.cvt + 200} RPM.`);
+            }
+
+            // Cek Per Sentri
+            if (sentri < std.sentri - 200 || sentri > std.sentri + 300) {
+                cocok = false;
+                saran.push(`Per Sentri ${sentri} RPM kurang pas. Standard: ${std.sentri} RPM. Range ideal: ${std.sentri - 200}-${std.sentri + 200} RPM.`);
+            }
+
+            // Tampilkan hasil
+            const hasilDiv = document.getElementById('hasil');
+            const motorName = document.getElementById('motor').options[document.getElementById('motor').selectedIndex].text;
+            let html = '';
+
+            if (cocok) {
+                hasilDiv.className = 'cocok show';
+                html = `
+                    <div class="hasil-title">✅ RACIKAN COCOK!</div>
+                    <div class="detail">
+                        <h3>Detail Racikan:</h3>
+                        <div class="detail-row">
+                            <span>Motor:</span>
+                            <strong>${motorName}</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Roller:</span>
+                            <strong>${roller} gram</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Per CVT:</span>
+                            <strong>${cvt} RPM</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Per Sentri:</span>
+                            <strong>${sentri} RPM</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Penggunaan:</span>
+                            <strong>${penggunaan.toUpperCase()}</strong>
+                        </div>
+                    </div>
+                    <div class="saran">
+                        <h3>✅ Hasil:</h3>
+                        <div class="saran-box">
+                            Racikan kamu udah oke buat ${penggunaan}! Tinggal tuning karbu/injeksi aja biar makin mantap. Jangan lupa cek CVT & belt secara rutin!
+                        </div>
+                   </div>
+
+</div>
+<button class="reset-btn" onclick="reset()">🔄 CEK LAGI</button>
+                `;
+            } else {
+                hasilDiv.className = 'tidak-cocok show';
+                html = `
+                    <div class="hasil-title">❌ KURANG OPTIMAL</div>
+                    <div class="detail">
+                        <h3>Detail Racikan:</h3>
+                        <div class="detail-row">
+                            <span>Motor:</span>
+                            <strong>${motorName}</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Roller:</span>
+                            <strong>${roller} gram</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Per CVT:</span>
+                            <strong>${cvt} RPM</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Per Sentri:</span>
+                            <strong>${sentri} RPM</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Penggunaan:</span>
+                            <strong>${penggunaan.toUpperCase()}</strong>
+                        </div>
+                    </div>
+                    <div class="saran">
+                        <h3>🔧 Saran Perbaikan:</h3>
+                        ${saran.map(s => `<div class="saran-box">❗ ${s}</div>`).join('')}
+                    </div>
+                    <button class="reset-btn" onclick="reset()">🔄 CEK LAGI</button>
+                `;
+            }
+
+            hasilDiv.innerHTML = html;
+            hasilDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function reset() {
+            document.getElementById('hasil').className = '';
+            document.getElementById('motor').value = '';
+            document.getElementById('roller').value = '';
+            document.getElementById('cvt').value = '';
+            document.getElementById('sentri').value = '';
+            document.getElementById('penggunaan').value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>kirian by FlyGarage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>kirian<span>byFlyGarage</span></h1>
+  <p>"dulu sibuk nyari siapa yg cocok di hati, sekarang sibuk nyari settingan kirian yg pas di cvt"</p>
+</header>
+
+<section class="selector">
+<select id="motor">
+  <option value="">-- Pilih Motor --</option>
+  <option value="scoopy_k2f">Scoopy K2F/K0J (2021-2024)</option>
+  <option value="beat_k2f">Beat K2F/K0J (2021–2024)</option>
+  <option value="vario_led_new_125_gen2">Vario Led New (2022-2025)</option>
+  <option value="vario150_led_new_old">vario150_led_new/old (2015-2021)</option>
+  <option value="beat_scoopy_esp_k44">beat_scoopy_esp_k44 (2016-2020)</option>
+  <<option value="VARIO_160">VARIO_160</option>
+</select>
+
+  <select id="kebutuhan">
+    <option value="">Pilih Kebutuhan</option>
+    <option value="harian">Harian / Boncengan / Nanjak (Akselerasi)</option>
+  </select>
+
+  <button onclick="gasRacikan()">GAS RACIKAN</button>
+</section>
+
+<section id="hasil" class="hasil"></section>
+
+<script src="script.js"></script>
+</body>
+</html>
